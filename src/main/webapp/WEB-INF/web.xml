@@ -3,19 +3,26 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="Your_WebApp_ID"
-	version="2.5">
+	id="Your_WebApp_ID" version="2.5">
 	<display-name>Archetype Created Web Application</display-name>
 
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
-			<el-ignored>false</el-ignored> 
+			<el-ignored>false</el-ignored>
 		</jsp-property-group>
 	</jsp-config>
+	
+	<filter>
+		<filter-name>SessionCheckFilter</filter-name>
+		<filter-class>servlets.SessionCheckFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionCheckFilter</filter-name>
+		<url-pattern>/signup</url-pattern>
+	</filter-mapping>
 
 	<servlet>
 		<servlet-name>FeedTest</servlet-name>
@@ -25,7 +32,7 @@
 		<servlet-name>FeedTest</servlet-name>
 		<url-pattern>/FeedTest</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>site-home</servlet-name>
 		<jsp-file>/Common/Index.jsp</jsp-file>

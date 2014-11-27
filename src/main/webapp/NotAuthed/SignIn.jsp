@@ -1,3 +1,9 @@
+<%
+String username = config.getInitParameter("username");
+if(username != null) {
+	session.setAttribute("USERNAME", username); 
+}
+%> 
 <h1>Login</h1>
 <form action="">
 	Username <input type="text" name="username" />
