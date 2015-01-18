@@ -1,3 +1,3 @@
 <div>
-	<p>&copy; 2014 Dmitry Antonov</p>
+	<p>&copy; 2015 Dmitry Antonov</p>
 </div>

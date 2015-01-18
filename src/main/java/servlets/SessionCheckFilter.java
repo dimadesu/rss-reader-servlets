@@ -38,9 +38,9 @@ public class SessionCheckFilter implements Filter {
 	    HttpServletResponse res = (HttpServletResponse) response;  
 
 	    if (req.getSession().getAttribute("USERNAME") == null) {
-	        res.sendRedirect(contextPath + "/home");
+	    	res.sendRedirect(contextPath + "/home");
 	    } else {
-	      chain.doFilter(request, response);
+	    	chain.doFilter(request, response);
 	    }
 	}
 

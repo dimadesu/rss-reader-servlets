@@ -25,6 +25,14 @@ if(pageId == null) {
 %>
 	<%@ include file="../NotAuthed/SignUp.jsp" %>
 <%
+} else if (pageId.equals("SignOut")) {
+%>
+	<%@ include file="../NotAuthed/SignOut.jsp" %>
+<%
+} else if (pageId.equals("Feed")) {
+%>
+	<jsp:include page="/FeedServlet" />
+<%
 }
 %>
 </div>

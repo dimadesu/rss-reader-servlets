@@ -1,7 +1,7 @@
 <%
-String username = config.getInitParameter("username");
+String username = request.getParameter("username");
 if(username != null) {
-	session.setAttribute("USERNAME", username); 
+	session.setAttribute("USERNAME", username);
 }
 %> 
 <h1>Login</h1>
