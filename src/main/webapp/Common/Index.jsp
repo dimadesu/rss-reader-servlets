@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<!-- Bootstrap core CSS -->
+<link href="${pageContext.request.contextPath}/assets/styles/bootstrap.css" rel="stylesheet" />
 <title>Login</title>
 </head>
 <body>
+<jsp:include page="/DBTest" />
 <div class="container">
 <%@ include file="../Common/Header.jsp" %>
 <div class="well">
@@ -38,7 +41,5 @@ if(pageId == null) {
 </div>
 <%@ include file="../Common/Footer.jsp" %>
 </div>
-<!-- Bootstrap core CSS -->
-<link href="${pageContext.request.contextPath}/assets/styles/bootstrap.css" rel="stylesheet" />
 </body>
 </html>

@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="Your_WebApp_ID"
-	version="2.5">
+	id="Your_WebApp_ID" version="2.5">
+
 	<display-name>Archetype Created Web Application</display-name>
+
+	<context-param>
+		<param-name>debug</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+
+	<!-- <env-entry>
+		<description>admin email</description>
+		<env-entry-name>adminEmail</env-entry-name>
+		<env-entry-value>dantonov@dataart.com</env-entry-value>
+	</env-entry>
+
+	<resource-ref>
+		<res-ref-name>HRDS</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<mapped-name>jdbc/__default</mapped-name>
+	</resource-ref> -->
 
 	<jsp-config>
 		<jsp-property-group>
@@ -15,7 +34,7 @@
 			<el-ignored>false</el-ignored>
 		</jsp-property-group>
 	</jsp-config>
-	
+
 	<filter>
 		<filter-name>SessionCheckFilter</filter-name>
 		<filter-class>servlets.SessionCheckFilter</filter-class>
@@ -24,6 +43,15 @@
 		<filter-name>SessionCheckFilter</filter-name>
 		<url-pattern>/signup</url-pattern>
 	</filter-mapping>
+
+	<servlet>
+		<servlet-name>DBTest</servlet-name>
+		<servlet-class>servlets.DBTest</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DBTest</servlet-name>
+		<url-pattern>/DBTest</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>FeedServlet</servlet-name>
