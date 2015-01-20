@@ -64,7 +64,7 @@
 
 	<servlet>
 		<servlet-name>FeedServletInMaster</servlet-name>
-		<jsp-file>/Common/Index.jsp</jsp-file>
+		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
 		<init-param>
 			<param-name>p</param-name>
 			<param-value>Feed</param-value>
@@ -77,7 +77,7 @@
 
 	<servlet>
 		<servlet-name>site-home</servlet-name>
-		<jsp-file>/Common/Index.jsp</jsp-file>
+		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>site-home</servlet-name>
@@ -86,7 +86,7 @@
 
 	<servlet>
 		<servlet-name>signup</servlet-name>
-		<jsp-file>/Common/Index.jsp</jsp-file>
+		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
 		<init-param>
 			<param-name>p</param-name>
 			<param-value>SignUp</param-value>
@@ -99,7 +99,7 @@
 
 	<servlet>
 		<servlet-name>signin</servlet-name>
-		<jsp-file>/Common/Index.jsp</jsp-file>
+		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
 		<init-param>
 			<param-name>p</param-name>
 			<param-value>SignIn</param-value>
@@ -112,7 +112,7 @@
 
 	<servlet>
 		<servlet-name>signout</servlet-name>
-		<jsp-file>/Common/Index.jsp</jsp-file>
+		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
 		<init-param>
 			<param-name>p</param-name>
 			<param-value>SignOut</param-value>
