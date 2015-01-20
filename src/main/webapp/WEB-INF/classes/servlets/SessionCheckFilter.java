@@ -36,8 +36,12 @@ public class SessionCheckFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 	    HttpServletResponse res = (HttpServletResponse) response;  
+	    String uri = req.getRequestURI();
 
-	    if (req.getSession().getAttribute("USERNAME") == null) {
+	    if (
+    		(req.getSession().getAttribute("USERNAME") == null) &&
+    		!(uri.endsWith("home") || uri.endsWith("signup") || uri.endsWith("signin") || uri.contains("assets"))
+		) {
 	    	res.sendRedirect(contextPath + "/home");
 	    } else {
 	    	chain.doFilter(request, response);

@@ -21,9 +21,9 @@ if(session.getAttribute("USERNAME") == null) {
 		<a href="${pageContext.request.contextPath}/signout">Sign Out</a>
 	</p>
 	<p>
-		<a href="${pageContext.request.contextPath}/">Home</a>
-		|
 		<a href="${pageContext.request.contextPath}/Feed">View Feed</a>
+		|
+		<a href="${pageContext.request.contextPath}/ManageFeeds">Manage Feeds</a>
 	</p>
 <% } %>
 </div>

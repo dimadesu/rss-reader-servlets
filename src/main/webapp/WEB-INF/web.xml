@@ -35,15 +35,20 @@
 		</jsp-property-group>
 	</jsp-config>
 
+	<welcome-file-list>
+		<welcome-file>Index.jsp</welcome-file>
+	</welcome-file-list>
+
 	<filter>
 		<filter-name>SessionCheckFilter</filter-name>
 		<filter-class>servlets.SessionCheckFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SessionCheckFilter</filter-name>
-		<url-pattern>/signup</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<!-- DB -->
 	<servlet>
 		<servlet-name>DBTest</servlet-name>
 		<servlet-class>servlets.DBTest</servlet-class>
@@ -53,28 +58,7 @@
 		<url-pattern>/DBTest</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>FeedServlet</servlet-name>
-		<servlet-class>servlets.Home</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FeedServlet</servlet-name>
-		<url-pattern>/FeedServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>FeedServletInMaster</servlet-name>
-		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
-		<init-param>
-			<param-name>p</param-name>
-			<param-value>Feed</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FeedServletInMaster</servlet-name>
-		<url-pattern>/Feed</url-pattern>
-	</servlet-mapping>
-
+	<!-- Common -->
 	<servlet>
 		<servlet-name>site-home</servlet-name>
 		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
@@ -84,6 +68,7 @@
 		<url-pattern>/home</url-pattern>
 	</servlet-mapping>
 
+	<!-- Not Authed -->
 	<servlet>
 		<servlet-name>signup</servlet-name>
 		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
@@ -123,8 +108,53 @@
 		<url-pattern>/signout</url-pattern>
 	</servlet-mapping>
 
-	<welcome-file-list>
-		<welcome-file>Index.jsp</welcome-file>
-	</welcome-file-list>
+	<!-- Authed -->
+	<servlet>
+		<servlet-name>FeedServlet</servlet-name>
+		<servlet-class>servlets.Home</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FeedServlet</servlet-name>
+		<url-pattern>/FeedServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>FeedServletInMaster</servlet-name>
+		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
+		<init-param>
+			<param-name>p</param-name>
+			<param-value>Feed</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FeedServletInMaster</servlet-name>
+		<url-pattern>/Feed</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ManageFeeds</servlet-name>
+		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
+		<init-param>
+			<param-name>p</param-name>
+			<param-value>ManageFeeds</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManageFeeds</servlet-name>
+		<url-pattern>/ManageFeeds</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AddFeed</servlet-name>
+		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
+		<init-param>
+			<param-name>p</param-name>
+			<param-value>AddFeed</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddFeed</servlet-name>
+		<url-pattern>/ManageFeeds/AddFeed</url-pattern>
+	</servlet-mapping>
 
 </web-app>
