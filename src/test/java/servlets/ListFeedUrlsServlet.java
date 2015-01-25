@@ -10,14 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AddFeedUrlServlet extends HttpServlet {
+public class ListFeedUrlsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AddFeedUrlServlet() {
+    public ListFeedUrlsServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO: get user id in request
+		String username = (String) request.getSession().getAttribute("USERNAME");
 		if(request.getAttribute("id") != null) {
 			ResultSet rs = DB.select("select url from feeds where id =" + request.getAttribute("id") + ";");
 			try {
@@ -28,7 +30,7 @@ public class AddFeedUrlServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		request.setAttribute("viewId", "AddFeedUrlServlet");
+		request.setAttribute("viewId", "ListFeedUrlsServlet");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}
@@ -78,7 +80,7 @@ public class AddFeedUrlServlet extends HttpServlet {
 		}
 		request.setAttribute("id", id);
 		request.setAttribute("url", url);
-		request.setAttribute("viewId", "AddFeedUrlServlet");
+		request.setAttribute("viewId", "ListFeedUrlsServlet");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp" +
 			(id != null ? "?id=" + id : ""));
 		rd.forward(request, response);

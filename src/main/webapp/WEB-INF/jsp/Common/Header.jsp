@@ -9,16 +9,16 @@ if(session.getAttribute("USERNAME") == null) {
 %>
 	<p>
 		Please
-		<a href="${pageContext.request.contextPath}/signin">Sign In</a>
+		<a href="${pageContext.request.contextPath}/SignIn">Sign In</a>
 		or
-		<a href="${pageContext.request.contextPath}/signup">Sign Up</a>
+		<a href="${pageContext.request.contextPath}/SignUp">Sign Up</a>
 	</p>
 <% 
 } else {
 %>
 	<p>
 		Welcome, ${sessionScope.USERNAME}!
-		<a href="${pageContext.request.contextPath}/signout">Sign Out</a>
+		<a href="${pageContext.request.contextPath}/SignOut">Sign Out</a>
 	</p>
 	<p>
 		<a href="${pageContext.request.contextPath}/Feed">View Feed</a>

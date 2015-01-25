@@ -48,109 +48,66 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- DB -->
-	<servlet>
-		<servlet-name>DBTest</servlet-name>
-		<servlet-class>servlets.DBTest</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DBTest</servlet-name>
-		<url-pattern>/DBTest</url-pattern>
-	</servlet-mapping>
-
 	<!-- Common -->
 	<servlet>
-		<servlet-name>site-home</servlet-name>
-		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>servlets.HomeServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>site-home</servlet-name>
-		<url-pattern>/home</url-pattern>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/Home</url-pattern>
 	</servlet-mapping>
 
 	<!-- Not Authed -->
 	<servlet>
-		<servlet-name>signup</servlet-name>
-		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
-		<init-param>
-			<param-name>p</param-name>
-			<param-value>SignUp</param-value>
-		</init-param>
+		<servlet-name>SignUpServlet</servlet-name>
+		<servlet-class>servlets.SignUpServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>signup</servlet-name>
-		<url-pattern>/signup</url-pattern>
+		<servlet-name>SignUpServlet</servlet-name>
+		<url-pattern>/SignUp</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>signin</servlet-name>
-		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
-		<init-param>
-			<param-name>p</param-name>
-			<param-value>SignIn</param-value>
-		</init-param>
+		<servlet-name>SignInServlet</servlet-name>
+		<servlet-class>servlets.SignInServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>signin</servlet-name>
-		<url-pattern>/signin</url-pattern>
+		<servlet-name>SignInServlet</servlet-name>
+		<url-pattern>/SignIn</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>signout</servlet-name>
-		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
-		<init-param>
-			<param-name>p</param-name>
-			<param-value>SignOut</param-value>
-		</init-param>
+		<servlet-name>SignOutServlet</servlet-name>
+		<servlet-class>servlets.SignOutServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>signout</servlet-name>
-		<url-pattern>/signout</url-pattern>
+		<servlet-name>SignOutServlet</servlet-name>
+		<url-pattern>/SignOut</url-pattern>
 	</servlet-mapping>
 
 	<!-- Authed -->
 	<servlet>
-		<servlet-name>FeedServlet</servlet-name>
-		<servlet-class>servlets.Home</servlet-class>
+		<servlet-name>FeedViewServlet</servlet-name>
+		<servlet-class>servlets.FeedViewServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>FeedServlet</servlet-name>
-		<url-pattern>/FeedServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>FeedServletInMaster</servlet-name>
-		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
-		<init-param>
-			<param-name>p</param-name>
-			<param-value>Feed</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FeedServletInMaster</servlet-name>
+		<servlet-name>FeedViewServlet</servlet-name>
 		<url-pattern>/Feed</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>ManageFeedUrls</servlet-name>
-		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
-		<init-param>
-			<param-name>p</param-name>
-			<param-value>ManageFeedUrls</param-value>
-		</init-param>
+		<servlet-name>ListFeedUrlsServlet</servlet-name>
+		<servlet-class>servlets.ListFeedUrlsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ManageFeedUrls</servlet-name>
+		<servlet-name>ListFeedUrlsServlet</servlet-name>
 		<url-pattern>/ManageFeedUrls</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>AddFeedUrlServlet</servlet-name>
 		<servlet-class>servlets.AddFeedUrlServlet</servlet-class>
-		<init-param>
-			<param-name>p</param-name>
-			<param-value>AddFeedUrl</param-value>
-		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AddFeedUrlServlet</servlet-name>

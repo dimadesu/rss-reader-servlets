@@ -15,47 +15,45 @@
 <title>RSS Reader</title>
 </head>
 <body>
-<jsp:include page="/DBTest" />
 <div class="container">
-<%@ include file="../Common/Header.jsp" %>
+<jsp:include page="/WEB-INF/jsp/Common/Header.jsp" />
 <div class="well">
 <%
-String pageId = config.getInitParameter("p");
-String requestPageId = (String) request.getAttribute("p");
-if (pageId == null) {
+String viewId = (String) request.getAttribute("viewId");
+if (viewId.equals("HomeServlet")) {
 %>    
-	<%@ include file="../Authed/ManageFeedUrls/AddFeedUrl.jsp" %>
+	<jsp:include page="/WEB-INF/jsp/NotAuthed/Home.jsp" />
 <%
 //Not authed
-} else if (pageId.equals("SignIn")) {
+} else if (viewId.equals("SignInServlet")) {
 %>
-	<%@ include file="../NotAuthed/SignIn.jsp" %>
+	<jsp:include page="/WEB-INF/jsp/NotAuthed/SignIn.jsp" />
 <%
-} else if (pageId.equals("SignUp")) {
+} else if (viewId.equals("SignUpServlet")) {
 %>
-	<%@ include file="../NotAuthed/SignUp.jsp" %>
+	<jsp:include page="/WEB-INF/jsp/NotAuthed/SignUp.jsp" />
 <%
-} else if (pageId.equals("SignOut")) {
+} else if (viewId.equals("SignOutServlet")) {
 %>
-	<%@ include file="../NotAuthed/SignOut.jsp" %>
+	<jsp:include page="/WEB-INF/jsp/NotAuthed/SignOut.jsp" />
 <%
-// Authed
-} else if (pageId.equals("Feed")) {
+//Authed
+} else if (viewId.equals("FeedViewServlet")) {
 %>
-	<jsp:include page="/FeedServlet" />
+	<jsp:include page="/WEB-INF/jsp/Authed/ViewFeed.jsp" />
 <%
-} else if (pageId.equals("ManageFeedUrls")) {
+} else if (viewId.equals("ListFeedUrlsServlet")) {
 %>
-	<%@ include file="../Authed/ManageFeedUrls/ListFeedUrls.jsp" %>
+	<jsp:include page="/WEB-INF/jsp/Authed/ManageFeedUrls/ListFeedUrls.jsp" />
 <%
-} else if (requestPageId.equals("AddFeedUrl")) {
+} else if (viewId.equals("AddFeedUrlServlet")) {
 %>
-	<jsp:include page="/ManageFeedUrls/AddFeedUrl" />
+	<jsp:include page="/WEB-INF/jsp/Authed/ManageFeedUrls/AddFeedUrl.jsp" />
 <%
 }
 %>
 </div>
-<%@ include file="../Common/Footer.jsp" %>
+<jsp:include page="/WEB-INF/jsp/Common/Footer.jsp" />
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>

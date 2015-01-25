@@ -12,6 +12,6 @@
 			${requestScope.id != null ? "Edit" : "Add"}
 		</button>
 		<input name="id" type="hidden" value="${requestScope.id}"/>
-		<a class="btn btn-default" href="${pageContext.request.contextPath}/ManageFeeds">Cancel</a>
+		<a class="btn btn-default" href="${pageContext.request.contextPath}/ManageFeedUrls">Cancel</a>
 	</div>
 </form>

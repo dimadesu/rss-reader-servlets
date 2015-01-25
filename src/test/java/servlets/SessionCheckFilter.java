@@ -40,9 +40,9 @@ public class SessionCheckFilter implements Filter {
 
 	    if (
     		(req.getSession().getAttribute("USERNAME") == null) &&
-    		!(uri.endsWith("home") || uri.endsWith("signup") || uri.endsWith("signin") || uri.contains("assets"))
+    		!(uri.endsWith("Home") || uri.endsWith("SignUp") || uri.endsWith("SignIn") || uri.contains("assets"))
 		) {
-	    	res.sendRedirect(contextPath + "/home");
+	    	res.sendRedirect(contextPath + "/Home");
 	    } else {
 	    	chain.doFilter(request, response);
 	    }
