@@ -23,7 +23,7 @@ if(session.getAttribute("USERNAME") == null) {
 	<p>
 		<a href="${pageContext.request.contextPath}/Feed">View Feed</a>
 		|
-		<a href="${pageContext.request.contextPath}/ManageFeeds">Manage Feeds</a>
+		<a href="${pageContext.request.contextPath}/ManageFeedUrls">Manage Feeds</a>
 	</p>
 <% } %>
 </div>

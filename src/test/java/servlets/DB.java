@@ -2,9 +2,9 @@ package servlets;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.http.HttpServlet;
 
@@ -32,16 +32,35 @@ public class DB {
 		}
 	}
 
-	public static ResultSet exec(String query) {
+	public static ResultSet select(String query) {
 		init();
+		
 		ResultSet rs = null;
+		Statement st = null;
+		
 		try {
-			PreparedStatement pst = con.prepareStatement(query);
-			pst.clearParameters();
-			rs = pst.executeQuery();
+			st = con.createStatement();
+			rs = st.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace(System.out);
 		}
+		
 		return rs;
+	}
+
+	public static Integer update(String query) {
+		init();
+		
+		Statement st = null;
+		int updateResult = 0;
+		
+		try {
+			st = con.createStatement();
+			updateResult = st.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace(System.out);
+		}
+		
+		return updateResult;
 	}
 }

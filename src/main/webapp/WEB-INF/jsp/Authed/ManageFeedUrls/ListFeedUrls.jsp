@@ -1,7 +1,7 @@
 <h1>Manage Feeds</h1>
 <p>
 	RSS Feed URL
-	<a href="${pageContext.request.contextPath}/ManageFeeds/AddFeed?id=1"
+	<a href="${pageContext.request.contextPath}/ManageFeedUrls/AddFeedUrl?id=1"
 		class="btn btn-default">
 		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 		Edit
@@ -13,7 +13,7 @@
 	</a>
 </p>
 <p>
-	<a href="${pageContext.request.contextPath}/ManageFeeds/AddFeed"
+	<a href="${pageContext.request.contextPath}/ManageFeedUrls/AddFeedUrl"
 		class="btn btn-primary">
 		<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 		Add

@@ -132,29 +132,29 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>ManageFeeds</servlet-name>
+		<servlet-name>ManageFeedUrls</servlet-name>
 		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
 		<init-param>
 			<param-name>p</param-name>
-			<param-value>ManageFeeds</param-value>
+			<param-value>ManageFeedUrls</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ManageFeeds</servlet-name>
-		<url-pattern>/ManageFeeds</url-pattern>
+		<servlet-name>ManageFeedUrls</servlet-name>
+		<url-pattern>/ManageFeedUrls</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>AddFeed</servlet-name>
-		<jsp-file>/WEB-INF/jsp/Common/Index.jsp</jsp-file>
+		<servlet-name>AddFeedUrlServlet</servlet-name>
+		<servlet-class>servlets.AddFeedUrlServlet</servlet-class>
 		<init-param>
 			<param-name>p</param-name>
-			<param-value>AddFeed</param-value>
+			<param-value>AddFeedUrl</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>AddFeed</servlet-name>
-		<url-pattern>/ManageFeeds/AddFeed</url-pattern>
+		<servlet-name>AddFeedUrlServlet</servlet-name>
+		<url-pattern>/ManageFeedUrls/AddFeedUrl</url-pattern>
 	</servlet-mapping>
 
 </web-app>

@@ -22,7 +22,7 @@ public class DBTest extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		ResultSet rs = DB.exec("select * from users");
+		ResultSet rs = DB.select("select * from users");
 		try {
 			while (rs.next()) {
 				out.write("<br/>" + rs.getString(1));

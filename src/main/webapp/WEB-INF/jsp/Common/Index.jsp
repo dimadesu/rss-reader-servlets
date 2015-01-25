@@ -21,11 +21,12 @@
 <div class="well">
 <%
 String pageId = config.getInitParameter("p");
-if(pageId == null) { 
+String requestPageId = (String) request.getAttribute("p");
+if (pageId == null) {
 %>    
-	<%@ include file="../NotAuthed/Home.jsp" %>
+	<%@ include file="../Authed/ManageFeedUrls/AddFeedUrl.jsp" %>
 <%
-// Not authed
+//Not authed
 } else if (pageId.equals("SignIn")) {
 %>
 	<%@ include file="../NotAuthed/SignIn.jsp" %>
@@ -43,13 +44,13 @@ if(pageId == null) {
 %>
 	<jsp:include page="/FeedServlet" />
 <%
-} else if (pageId.equals("ManageFeeds")) {
+} else if (pageId.equals("ManageFeedUrls")) {
 %>
 	<%@ include file="../Authed/ManageFeedUrls/ListFeedUrls.jsp" %>
 <%
-} else if (pageId.equals("AddFeed")) {
+} else if (requestPageId.equals("AddFeedUrl")) {
 %>
-	<jsp:include page="/WEB-INF/jsp/Authed/ManageFeedUrls/AddFeedUrl.jsp" />
+	<jsp:include page="/ManageFeedUrls/AddFeedUrl" />
 <%
 }
 %>
