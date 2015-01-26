@@ -73,6 +73,8 @@ public class AddFeedUrlServlet extends HttpServlet {
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
+					DB.update("INSERT INTO FEEDUSER (ID, FEEDID, USERID) VALUES (null, '" +
+						id + "', '" + request.getSession().getAttribute("USERID") +"');");
 				}
 			}
 		}

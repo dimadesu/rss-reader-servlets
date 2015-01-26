@@ -3,6 +3,9 @@ package servlets;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,17 +22,25 @@ public class ListFeedUrlsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: get user id in request
-		String username = (String) request.getSession().getAttribute("USERNAME");
-		if(request.getAttribute("id") != null) {
-			ResultSet rs = DB.select("select url from feeds where id =" + request.getAttribute("id") + ";");
-			try {
-				while(rs.next()) {
-					request.setAttribute("url", rs.getString(1));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+		Integer userid = (Integer) request.getSession().getAttribute("USERID");
+		// Returns: id, url
+		String query = "SELECT FEEDS.*  " +
+			"FROM FEEDUSER JOIN FEEDS ON FEEDUSER.FEEDID = FEEDS.ID " +
+			"WHERE FEEDUSER.USERID = "+ userid +";";
+		
+		ResultSet rs = DB.select(query);
+		List<Hashtable<String, String>> list = new ArrayList<Hashtable<String, String>>();
+		try {
+			while(rs.next()) {
+				Hashtable<String, String> item = new Hashtable<String, String>();
+				item.put("id", rs.getString(1));
+				item.put("url", rs.getString(2));
+				list.add(item);
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		request.setAttribute("feedUrlsList", list);
 		request.setAttribute("viewId", "ListFeedUrlsServlet");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
