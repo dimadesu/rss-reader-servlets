@@ -114,4 +114,13 @@
 		<url-pattern>/ManageFeedUrls/AddFeedUrl</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>DeleteFeedUrlServlet</servlet-name>
+		<servlet-class>servlets.feedurl.DeleteFeedUrlServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteFeedUrlServlet</servlet-name>
+		<url-pattern>/ManageFeedUrls/DeleteFeedUrl</url-pattern>
+	</servlet-mapping>
+
 </web-app>

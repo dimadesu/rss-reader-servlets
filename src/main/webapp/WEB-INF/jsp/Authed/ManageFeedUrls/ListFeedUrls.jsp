@@ -8,7 +8,7 @@
 		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 		Edit
 	</a>
-	<a href='${pageContext.request.contextPath}/ManageFeeds/Delete?id=<c:out value="${item.id}"/>'
+	<a href='${pageContext.request.contextPath}/ManageFeedUrls/DeleteFeedUrl?id=<c:out value="${item.id}"/>'
 		class="btn btn-danger">
 		<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
 		Delete
