@@ -32,7 +32,7 @@ public class RSSFeedParser {
 		Collection feed = null;
 		try {
 			boolean isFeedHeader = true;
-			// Set header values intial to the empty string
+			// Set header values initial to the empty string
 			String description = "";
 			String title = "";
 			String link = "";
