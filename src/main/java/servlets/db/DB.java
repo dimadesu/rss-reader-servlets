@@ -2,6 +2,7 @@ package servlets.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,11 +37,11 @@ public class DB {
 		init();
 		
 		ResultSet rs = null;
-		Statement st = null;
+		PreparedStatement st = null;
 		
 		try {
-			st = con.createStatement();
-			rs = st.executeQuery(query);
+			st = con.prepareStatement(query);
+			rs = st.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace(System.out);
 		}
@@ -51,12 +52,12 @@ public class DB {
 	public static Integer update(String query) {
 		init();
 		
-		Statement st = null;
+		PreparedStatement st = null;
 		int updateResult = 0;
 		
 		try {
-			st = con.createStatement();
-			updateResult = st.executeUpdate(query);
+			st = con.prepareStatement(query);
+			updateResult = st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace(System.out);
 		}

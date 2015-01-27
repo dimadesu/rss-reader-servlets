@@ -11,7 +11,7 @@ public class Collection {
 	final String description;
 	final String pubDate;
 
-	final List<Item> entries = new ArrayList<Item>();
+	List<Item> entries = new ArrayList<Item>();
 
 	public Collection(String title, String guid, String link,
 			String description, String pubDate) {
@@ -24,6 +24,10 @@ public class Collection {
 
 	public List<Item> getItems() {
 		return entries;
+	}
+
+	public void setItems(List<Item> list) {
+		entries = list;
 	}
 
 	public String getTitle() {

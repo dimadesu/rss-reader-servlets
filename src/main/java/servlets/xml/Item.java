@@ -7,6 +7,18 @@ public class Item {
 	String link;
 	String description;
 	String pubDate;
+	
+	public Item() {
+	}
+	
+	public Item(String title, String guid, String link,
+			String description, String pubDate) {
+		this.title = title;
+		this.guid = guid;
+		this.link = link;
+		this.description = description;
+		this.pubDate = pubDate;
+	}
 
 	public String getTitle() {
 		return title;
