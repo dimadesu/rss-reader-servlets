@@ -30,7 +30,6 @@ public class SignUpServlet extends HttpServlet {
 		String returnType = null;
 		String returnMessage = null;
 		ResultSet rs = null;
-		Integer resultId = null;
 		String username = (String) request.getParameter("username");
 		if(username != null && username.trim().equals("")) {
 			username = null;
@@ -39,33 +38,47 @@ public class SignUpServlet extends HttpServlet {
 		if(password != null && password.trim().equals("")) {
 			password = null;
 		}
-		String resultPassword = null; 
-		if(username != null && password != null){
+		if(username == null){
+			returnType = "error";
+			returnMessage = "Username cannot be empty.";
+		} else if (password == null) {
+			returnType = "error";
+			returnMessage = "Password cannot be empty.";
+		} else if(username != null && password != null){
 			rs = DB.select("SELECT * FROM USERS WHERE USERNAME = '" + username + "';");
+			Boolean isUsernameTaken = false;
 			try {
 				if (rs.next()) {
-					returnType = "success";
-					resultId = rs.getInt(1);
-					resultPassword = rs.getString(3);
-				} else {
-					returnType = "error";
-					returnMessage = "Username not found.";
+					isUsernameTaken = true;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+				returnType = "error";
+				returnMessage = "SQLException.";
+			}
+			if (!isUsernameTaken) {
+				DB.update("INSERT INTO USERS (ID, USERNAME, PASSWORD) VALUES (null, '" + username + "', '" + password + "');");
+				rs = DB.select("SELECT TOP 1 Id FROM USERS ORDER BY Id DESC");
+				try {
+					if (rs.next()) {
+						returnType = "success";
+						returnMessage = "Successfully signed up.";
+						HttpSession session = request.getSession();
+						session.setAttribute("USERNAME", username);
+						session.setAttribute("USERID", rs.getString(1));
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					returnType = "error";
+					returnMessage = "SQLException.";
+				}
+			} else {
+				returnType = "error";
+				returnMessage = "Username already taken.";
 			}
 		}
 		
-		if(returnType.equals("success") && password.equals(resultPassword)) {
-			HttpSession session = request.getSession();
-			session.setAttribute("USERNAME", username);
-			session.setAttribute("USERID", resultId);
-			returnMessage = "Successfully signed in.";
-		} else if (returnType.equals("success")) {
-			returnType = "error";
-			returnMessage = "Password mismatch.";
-		}
-		
+		request.setAttribute("username", username);
 		request.setAttribute("returnType", returnType);
 		request.setAttribute("returnMessage", returnMessage);
 		request.setAttribute("viewId", "/WEB-INF/jsp/NotAuthed/SignUp.jsp");

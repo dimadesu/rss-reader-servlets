@@ -1,17 +1,31 @@
 <h1>Sign In</h1>
-<% if(session.getAttribute("USERID") != null && request.getAttribute("returnType") == null){ %>
-	<div class="alert alert-warning">You're already signed in</div>
+<% if(session.getAttribute("USERID") != null){ %>
+	<% if (request.getAttribute("returnType") == null) { %>
+		<div class="alert alert-warning">You're already signed in.</div>
+	<% } else { %>
+		<%-- Success only --%>
+		<div class='alert alert-success' role='alert'>
+			${requestScope.returnMessage}
+		</div>
+	<% } %>
 <% } else { %>
 	<% if(request.getAttribute("returnType") != null) { %>
-		<div class='alert
-			${requestScope.returnType == "success" ? "alert-success" : "alert-danger"}'
-			role='alert'>
+		<%-- Errors only --%>
+		<div class='alert alert-danger' role='alert'>
 			${requestScope.returnMessage}
 		</div>
 	<% } %>
 	<form action="" method="post">
-		Username <input type="text" name="username" value="${requestScope.username}" />
-		Password <input type="password" name="password" />
-		<input type="submit" value="Sign In" />
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input class="form-control" type="text" id="username" name="username" placeholder="Username" value="${requestScope.username}" />
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input class="form-control" type="password" id="password" name="password" placeholder="Password" />
+		</div>
+		<div class="text-center">
+			<input class="btn btn-primary" type="submit" value="Sign In" />
+		</div>
 	</form>
 <% } %>

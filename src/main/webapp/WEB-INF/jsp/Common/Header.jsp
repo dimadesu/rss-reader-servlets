@@ -17,7 +17,7 @@ if(session.getAttribute("USERNAME") == null) {
 } else {
 %>
 	<p>
-		Welcome, ${sessionScope.USERNAME}!
+		Hi, ${sessionScope.USERNAME}!
 		<a href="${pageContext.request.contextPath}/SignOut">Sign Out</a>
 	</p>
 	<p>
