@@ -2,13 +2,18 @@
 <h1>Manage Feeds</h1>
 <c:forEach items="${requestScope.feedUrlsList}" var="item">  
 <p>
-	<c:out value="${item.url}"/>
-	<a href='${pageContext.request.contextPath}/ManageFeedUrls/AddFeedUrl?id=<c:out value="${item.id}"/>'
+	${item.url}
+	<a href='${pageContext.request.contextPath}/Feed?id=${item.id}'
+		class="btn btn-primary">
+		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+		View
+	</a>
+	<a href='${pageContext.request.contextPath}/ManageFeedUrls/AddFeedUrl?id=${item.id}'
 		class="btn btn-default">
 		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 		Edit
 	</a>
-	<a href='${pageContext.request.contextPath}/ManageFeedUrls/DeleteFeedUrl?id=<c:out value="${item.id}"/>'
+	<a href='${pageContext.request.contextPath}/ManageFeedUrls/DeleteFeedUrl?id=${item.id}'
 		class="btn btn-danger">
 		<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
 		Delete
