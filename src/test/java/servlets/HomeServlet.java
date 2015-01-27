@@ -16,7 +16,7 @@ public class HomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("viewId", "HomeServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/NotAuthed/Home.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}

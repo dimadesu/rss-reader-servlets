@@ -18,40 +18,7 @@
 <div class="container">
 <jsp:include page="/WEB-INF/jsp/Common/Header.jsp" />
 <div class="well">
-<%
-String viewId = (String) request.getAttribute("viewId");
-if (viewId.equals("HomeServlet")) {
-%>    
-	<jsp:include page="/WEB-INF/jsp/NotAuthed/Home.jsp" />
-<%
-//Not authed
-} else if (viewId.equals("SignInServlet")) {
-%>
-	<jsp:include page="/WEB-INF/jsp/NotAuthed/SignIn.jsp" />
-<%
-} else if (viewId.equals("SignUpServlet")) {
-%>
-	<jsp:include page="/WEB-INF/jsp/NotAuthed/SignUp.jsp" />
-<%
-} else if (viewId.equals("SignOutServlet")) {
-%>
-	<jsp:include page="/WEB-INF/jsp/NotAuthed/SignOut.jsp" />
-<%
-//Authed
-} else if (viewId.equals("FeedViewServlet")) {
-%>
-	<jsp:include page="/WEB-INF/jsp/Authed/ViewFeed.jsp" />
-<%
-} else if (viewId.equals("ListFeedUrlsServlet")) {
-%>
-	<jsp:include page="/WEB-INF/jsp/Authed/ManageFeedUrls/ListFeedUrls.jsp" />
-<%
-} else if (viewId.equals("AddFeedUrlServlet")) {
-%>
-	<jsp:include page="/WEB-INF/jsp/Authed/ManageFeedUrls/AddFeedUrl.jsp" />
-<%
-}
-%>
+<jsp:include page='<%= (String) request.getAttribute("viewId") %>' />
 </div>
 <jsp:include page="/WEB-INF/jsp/Common/Footer.jsp" />
 </div>

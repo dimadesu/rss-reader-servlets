@@ -18,7 +18,7 @@ public class SignOutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().removeAttribute("USERNAME");
 		request.getSession().removeAttribute("USERID");
-		request.setAttribute("viewId", "SignOutServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/NotAuthed/SignOut.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}

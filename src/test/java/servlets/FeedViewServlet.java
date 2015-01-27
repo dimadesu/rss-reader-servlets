@@ -2,7 +2,6 @@ package servlets;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,7 +30,7 @@ public class FeedViewServlet extends HttpServlet {
 		ReadTest tester = new ReadTest();
 		out.println("<h1>Home view</h1>");
 		tester.renderCollection(out);*/
-		request.setAttribute("viewId", "FeedViewServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ViewFeed.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}

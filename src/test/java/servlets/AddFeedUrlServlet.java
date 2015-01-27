@@ -29,7 +29,7 @@ public class AddFeedUrlServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		request.setAttribute("viewId", "AddFeedUrlServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ManageFeedUrls/AddFeedUrl.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}
@@ -81,7 +81,7 @@ public class AddFeedUrlServlet extends HttpServlet {
 		}
 		request.setAttribute("id", id);
 		request.setAttribute("url", url);
-		request.setAttribute("viewId", "AddFeedUrlServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ManageFeedUrls/AddFeedUrl.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp" +
 			(id != null ? "?id=" + id : ""));
 		rd.forward(request, response);

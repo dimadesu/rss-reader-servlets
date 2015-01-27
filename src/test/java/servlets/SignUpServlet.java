@@ -19,7 +19,7 @@ public class SignUpServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("viewId", "SignUpServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/NotAuthed/SignUp.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}
@@ -66,7 +66,7 @@ public class SignUpServlet extends HttpServlet {
 		
 		request.setAttribute("returnType", returnType);
 		request.setAttribute("returnMessage", returnMessage);
-		request.setAttribute("viewId", "SignUpServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/NotAuthed/SignUp.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}

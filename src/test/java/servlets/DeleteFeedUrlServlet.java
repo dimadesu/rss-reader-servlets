@@ -3,9 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,35 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ListFeedUrlsServlet extends HttpServlet {
+public class DeleteFeedUrlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ListFeedUrlsServlet() {
+    public DeleteFeedUrlServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: get user id in request
-		Integer userid = (Integer) request.getSession().getAttribute("USERID");
-		// Returns: id, url
-		String query = "SELECT FEEDS.*  " +
-			"FROM FEEDUSER JOIN FEEDS ON FEEDUSER.FEEDID = FEEDS.ID " +
-			"WHERE FEEDUSER.USERID = "+ userid +";";
-		
-		ResultSet rs = DB.select(query);
-		List<Hashtable<String, String>> list = new ArrayList<Hashtable<String, String>>();
-		try {
-			while(rs.next()) {
-				Hashtable<String, String> item = new Hashtable<String, String>();
-				item.put("id", rs.getString(1));
-				item.put("url", rs.getString(2));
-				list.add(item);
+		if(request.getParameter("id") != null) {
+			ResultSet rs = DB.select("select url from feeds where id =" + request.getParameter("id") + ";");
+			try {
+				if(rs.next()) {
+					request.setAttribute("id", rs.getString(1));
+					request.setAttribute("url", rs.getString(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
-		request.setAttribute("feedUrlsList", list);
-		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ManageFeedUrls/ListFeedUrls.jsp");
+		request.setAttribute("viewId", "DeleteFeedUrlServlet");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}
@@ -86,12 +74,14 @@ public class ListFeedUrlsServlet extends HttpServlet {
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
+					DB.update("INSERT INTO FEEDUSER (ID, FEEDID, USERID) VALUES (null, '" +
+						id + "', '" + request.getSession().getAttribute("USERID") +"');");
 				}
 			}
 		}
 		request.setAttribute("id", id);
 		request.setAttribute("url", url);
-		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ManageFeedUrls/ListFeedUrls.jsp");
+		request.setAttribute("viewId", "DeleteFeedUrlServlet");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp" +
 			(id != null ? "?id=" + id : ""));
 		rd.forward(request, response);
