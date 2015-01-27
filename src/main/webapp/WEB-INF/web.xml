@@ -41,7 +41,7 @@
 
 	<filter>
 		<filter-name>SessionCheckFilter</filter-name>
-		<filter-class>servlets.SessionCheckFilter</filter-class>
+		<filter-class>servlets.authentication.SessionCheckFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SessionCheckFilter</filter-name>
@@ -61,7 +61,7 @@
 	<!-- Not Authed -->
 	<servlet>
 		<servlet-name>SignUpServlet</servlet-name>
-		<servlet-class>servlets.SignUpServlet</servlet-class>
+		<servlet-class>servlets.authentication.SignUpServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SignUpServlet</servlet-name>
@@ -70,7 +70,7 @@
 
 	<servlet>
 		<servlet-name>SignInServlet</servlet-name>
-		<servlet-class>servlets.SignInServlet</servlet-class>
+		<servlet-class>servlets.authentication.SignInServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SignInServlet</servlet-name>
@@ -79,7 +79,7 @@
 
 	<servlet>
 		<servlet-name>SignOutServlet</servlet-name>
-		<servlet-class>servlets.SignOutServlet</servlet-class>
+		<servlet-class>servlets.authentication.SignOutServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SignOutServlet</servlet-name>
@@ -89,7 +89,7 @@
 	<!-- Authed -->
 	<servlet>
 		<servlet-name>FeedViewServlet</servlet-name>
-		<servlet-class>servlets.FeedViewServlet</servlet-class>
+		<servlet-class>servlets.feed.FeedViewServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FeedViewServlet</servlet-name>
@@ -98,7 +98,7 @@
 
 	<servlet>
 		<servlet-name>ListFeedUrlsServlet</servlet-name>
-		<servlet-class>servlets.ListFeedUrlsServlet</servlet-class>
+		<servlet-class>servlets.feedurl.ListFeedUrlsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ListFeedUrlsServlet</servlet-name>
@@ -107,7 +107,7 @@
 
 	<servlet>
 		<servlet-name>AddFeedUrlServlet</servlet-name>
-		<servlet-class>servlets.AddFeedUrlServlet</servlet-class>
+		<servlet-class>servlets.feedurl.AddFeedUrlServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AddFeedUrlServlet</servlet-name>

@@ -1,4 +1,4 @@
-package servlets;
+package servlets.feed;
 
 
 import java.io.IOException;

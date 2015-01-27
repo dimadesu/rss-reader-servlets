@@ -1,6 +1,10 @@
-package servlets;
+package servlets.feed;
 
 import java.io.PrintWriter;
+
+import servlets.xml.Collection;
+import servlets.xml.Item;
+import servlets.xml.RSSFeedParser;
 
 public class ReadTest {
 

@@ -1,4 +1,4 @@
-package servlets;
+package servlets.xml;
 
 import java.util.ArrayList;
 import java.util.List;

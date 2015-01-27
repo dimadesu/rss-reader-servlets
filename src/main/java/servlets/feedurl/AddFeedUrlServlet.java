@@ -1,4 +1,4 @@
-package servlets;
+package servlets.feedurl;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DeleteFeedUrlServlet extends HttpServlet {
+import servlets.db.DB;
+
+public class AddFeedUrlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public DeleteFeedUrlServlet() {
+    public AddFeedUrlServlet() {
         super();
     }
 
@@ -29,7 +31,7 @@ public class DeleteFeedUrlServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		request.setAttribute("viewId", "DeleteFeedUrlServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ManageFeedUrls/AddFeedUrl.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
 	}
@@ -81,7 +83,7 @@ public class DeleteFeedUrlServlet extends HttpServlet {
 		}
 		request.setAttribute("id", id);
 		request.setAttribute("url", url);
-		request.setAttribute("viewId", "DeleteFeedUrlServlet");
+		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ManageFeedUrls/AddFeedUrl.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp" +
 			(id != null ? "?id=" + id : ""));
 		rd.forward(request, response);

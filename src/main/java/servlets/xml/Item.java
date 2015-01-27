@@ -1,4 +1,4 @@
-package servlets;
+package servlets.xml;
 
 public class Item {
 

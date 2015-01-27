@@ -1,4 +1,4 @@
-package servlets;
+package servlets.authentication;
 
 import java.io.IOException;
 
