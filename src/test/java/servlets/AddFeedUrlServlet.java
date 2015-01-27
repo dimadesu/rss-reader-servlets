@@ -18,10 +18,11 @@ public class AddFeedUrlServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getAttribute("id") != null) {
-			ResultSet rs = DB.select("select url from feeds where id =" + request.getAttribute("id") + ";");
+		if(request.getParameter("id") != null) {
+			ResultSet rs = DB.select("select url from feeds where id =" + request.getParameter("id") + ";");
 			try {
-				while(rs.next()) {
+				if(rs.next()) {
+					request.setAttribute("id", rs.getString(1));
 					request.setAttribute("url", rs.getString(1));
 				}
 			} catch (SQLException e) {
