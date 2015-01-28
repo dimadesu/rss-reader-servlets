@@ -5,13 +5,16 @@ import java.util.List;
 
 public class Collection {
 
-	final String title;
-	final String guid;
-	final String link;
-	final String description;
-	final String pubDate;
+	private String title;
+	private String guid;
+	private String link;
+	private String description;
+	private String pubDate;
 
 	List<Item> entries = new ArrayList<Item>();
+
+	public Collection() {
+	}
 
 	public Collection(String title, String guid, String link,
 			String description, String pubDate) {

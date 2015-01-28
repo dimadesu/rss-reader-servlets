@@ -3,13 +3,18 @@
 <c:forEach items="${requestScope.feedUrlsList}" var="item">  
 <p>
 	${item.url}
-	<a href='${pageContext.request.contextPath}/Feed?id=${item.id}'
+	<a href='${pageContext.request.contextPath}/Feeds/Update?id=${item.id}'
+		class="btn btn-success">
+		<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+		Update
+	</a>
+	<a href='${pageContext.request.contextPath}/Feeds/View?id=${item.id}'
 		class="btn btn-primary">
 		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		View
 	</a>
 	<a href='${pageContext.request.contextPath}/ManageFeedUrls/AddFeedUrl?id=${item.id}'
-		class="btn btn-default">
+		class="btn btn-warning">
 		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 		Edit
 	</a>

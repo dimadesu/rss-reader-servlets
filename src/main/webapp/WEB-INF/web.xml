@@ -87,15 +87,7 @@
 	</servlet-mapping>
 
 	<!-- Authed -->
-	<servlet>
-		<servlet-name>FeedViewServlet</servlet-name>
-		<servlet-class>servlets.feed.FeedViewServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FeedViewServlet</servlet-name>
-		<url-pattern>/Feed</url-pattern>
-	</servlet-mapping>
-
+	<!-- Feed urls -->
 	<servlet>
 		<servlet-name>ListFeedUrlsServlet</servlet-name>
 		<servlet-class>servlets.feedurl.ListFeedUrlsServlet</servlet-class>
@@ -121,6 +113,25 @@
 	<servlet-mapping>
 		<servlet-name>DeleteFeedUrlServlet</servlet-name>
 		<url-pattern>/ManageFeedUrls/DeleteFeedUrl</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Feed Articles -->
+	<servlet>
+		<servlet-name>FeedViewServlet</servlet-name>
+		<servlet-class>servlets.feed.FeedViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FeedViewServlet</servlet-name>
+		<url-pattern>/Feeds/View</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FeedUpdateServlet</servlet-name>
+		<servlet-class>servlets.feed.FeedUpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FeedUpdateServlet</servlet-name>
+		<url-pattern>/Feeds/Update</url-pattern>
 	</servlet-mapping>
 
 </web-app>

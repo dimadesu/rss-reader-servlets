@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import servlets.db.DB;
 import servlets.xml.Collection;
 import servlets.xml.Item;
-import servlets.xml.RSSFeedParser;
 
 /**
  * Servlet implementation class Home
@@ -35,50 +34,7 @@ public class FeedViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String feedUrl = null;
 		String feedId = (String) request.getParameter("id");
-		Integer userId = (Integer) request.getSession().getAttribute("USERID");
-		// Returns: url
-		String query = "SELECT FEEDS.URL " +
-			"FROM FEEDUSER JOIN FEEDS ON FEEDUSER.FEEDID = FEEDS.ID " +
-			"WHERE FEEDUSER.USERID = " + userId.toString() + "AND FEEDUSER.FEEDID = " + feedId + ";";
-		ResultSet rs = DB.select(query);
-		try {
-			if(rs.next()) {
-				feedUrl = rs.getString(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		// Parser needs userid, feedid to locate feed url
-		// it will request url parse to collection, then iterate collection and fill in DB for articles
-		// when it iterates it should check if item id is already in DB for each item before inserting
-		// Maybe parse date to timestamp and keep it in DB as timestamp
-		RSSFeedParser parser = new RSSFeedParser(feedUrl);
-		Collection feed = parser.readFeed();
-		List<Item> articles = feed.getItems();
-		Boolean isGuidInDb = false;
-		for(Item article : articles) {
-			ResultSet rs2 = DB.select("select id from articles where guid = '" + article.getGuid() + "';");
-			try {
-				if(rs2.next()) {
-					isGuidInDb = true;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			if (!isGuidInDb) {
-				DB.update("INSERT INTO ARTICLES (ID, FEEDID, TITLE, GUID, LINK, DESCRIPTION, PUBDATE) VALUES " +
-						"(null, " +
-						feedId + ", '" +
-						article.getTitle().replaceAll("'", "''") + "', '" +
-						article.getGuid().replaceAll("'", "''") + "', '" +
-						article.getLink().replaceAll("'", "''") + "', '" +
-						article.getDescription().replaceAll("'", "''") + "', '" +
-						article.getPubDate().replaceAll("'", "''") + "');");
-			}
-		}
-		
 		ResultSet rs3 = DB.select("select ID, FEEDID, TITLE, GUID, LINK, DESCRIPTION, PUBDATE from articles where feedid = " + feedId + " order by id limit 10 offset 0;");
 		List<Item> newFeedItems = new ArrayList<Item> ();
 		try {
@@ -89,6 +45,7 @@ public class FeedViewServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		Collection feed = new Collection();
 		feed.setItems(newFeedItems);
 		request.setAttribute("feed", feed);
 		
