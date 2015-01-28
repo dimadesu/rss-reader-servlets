@@ -35,7 +35,40 @@ public class FeedViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String feedId = (String) request.getParameter("id");
-		ResultSet rs3 = DB.select("select ID, FEEDID, TITLE, GUID, LINK, DESCRIPTION, PUBDATE from articles where feedid = " + feedId + " order by id limit 10 offset 0;");
+		String defaultOrderBy = "articles.PUBDATE"; 
+		String orderBy = (String) request.getParameter("orderBy");
+		String defaultOrderDirection = "DESC";
+		String orderDirection = (String) request.getParameter("orderDirection");
+		Integer defaultPageNumber = 1;
+		String query = "select articles.ID, articles.FEEDID, articles.TITLE, articles.GUID, articles.LINK, articles.DESCRIPTION, articles.PUBDATE from articles" +
+			" JOIN FEEDUSER ON FEEDUSER.FEEDID = articles.feedid" +
+			" where FEEDUSER.userid = " + request.getSession().getAttribute("USERID");
+		if (feedId != "" && feedId != null) {
+			query += (" and feedid = " + feedId);
+		}
+		if(orderBy == null || !orderBy.matches("FEEDID|TITLE|GUID|LINK|DESCRIPTION|PUBDATE")){
+			orderBy = defaultOrderBy;
+		}
+		query += (" order by " + orderBy);
+		if(orderDirection == null || !orderDirection.matches("DESC|ASC")){
+			orderDirection = defaultOrderDirection;
+		}
+		query += (" " + orderDirection);
+		Integer pageNumber;
+		try {
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		} catch (NumberFormatException e1) {
+			pageNumber = defaultPageNumber;
+		}
+		Integer defaultPageSize = 10;
+		Integer pageSize;
+		try {
+			pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		} catch (NumberFormatException e1) {
+			pageSize = defaultPageSize;
+		}
+		query += (" limit " + pageSize + " offset " + (pageNumber - 1) * pageSize);
+		ResultSet rs3 = DB.select(query + ";");
 		List<Item> newFeedItems = new ArrayList<Item> ();
 		try {
 			while(rs3.next()) {
