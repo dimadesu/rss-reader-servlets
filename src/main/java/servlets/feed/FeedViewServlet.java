@@ -82,6 +82,12 @@ public class FeedViewServlet extends HttpServlet {
 		feed.setItems(newFeedItems);
 		request.setAttribute("feed", feed);
 		
+		request.setAttribute("feedId", feedId);
+		request.setAttribute("orderBy", orderBy);
+		request.setAttribute("orderDirection", orderDirection);
+		request.setAttribute("pageNumber", pageNumber);
+		request.setAttribute("pageSize", pageSize);
+		
 		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ViewFeed.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);
