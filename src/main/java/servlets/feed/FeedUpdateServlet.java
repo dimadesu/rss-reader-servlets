@@ -48,18 +48,23 @@ public class FeedUpdateServlet extends HttpServlet {
 		Collection feed = parser.readFeed();
 		List<Item> articles = feed.getItems();
 		Boolean isGuidInDb = false;
+		int rowsInserted = 0;
 		int rowsUpdated = 0;
 		for(Item article : articles) {
+			Integer articleId = null;
 			ResultSet rs2 = DB.select("select id from articles where guid = '" + article.getGuid() + "';");
 			try {
 				if(rs2.next()) {
+					articleId = rs2.getInt(1);
 					isGuidInDb = true;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			if (!isGuidInDb) {
-				rowsUpdated += DB.update("INSERT INTO ARTICLES (ID, FEEDID, TITLE, GUID, LINK, DESCRIPTION, PUBDATE) VALUES " +
+				// Replace single quotes with double single quotes. This syntax works for DB.
+				// Selects will work fine and return only one quote without any extra effort
+				rowsInserted += DB.update("INSERT INTO ARTICLES (ID, FEEDID, TITLE, GUID, LINK, DESCRIPTION, PUBDATE) VALUES " +
 						"(null, " +
 						feedId + ", '" +
 						article.getTitle().replaceAll("'", "''") + "', '" +
@@ -67,13 +72,22 @@ public class FeedUpdateServlet extends HttpServlet {
 						article.getLink().replaceAll("'", "''") + "', '" +
 						article.getDescription().replaceAll("'", "''") + "', '" +
 						article.getPubDate().replaceAll("'", "''") + "');");
+			} else {
+				rowsUpdated += DB.update("UPDATE ARTICLES SET " +
+						"FEEDID =" + feedId +
+						", TITLE = '" + article.getTitle().replaceAll("'", "''") + "'" +
+						", LINK = '" + article.getLink().replaceAll("'", "''") + "'" +
+						", DESCRIPTION = '" + article.getDescription().replaceAll("'", "''") + "'" +
+						", PUBDATE = '" + article.getPubDate().replaceAll("'", "''") + "'" +
+						" WHERE ID = " + articleId + ";");
 			}
-			if (rowsUpdated > 0) {
+			if (rowsUpdated > 0 || rowsInserted > 0) {
 				request.setAttribute("returnType", "success");
 			} else {
 				request.setAttribute("returnType", "warning");
 			}
 		}
+		request.setAttribute("rowsInserted", rowsInserted);
 		request.setAttribute("rowsUpdated", rowsUpdated);
 		
 		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/UpdateFeed.jsp");
