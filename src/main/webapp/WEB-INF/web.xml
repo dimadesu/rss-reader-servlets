@@ -142,5 +142,14 @@
 		<servlet-name>ArticleReadServlet</servlet-name>
 		<url-pattern>/Article/Read</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ArticleDeleteServlet</servlet-name>
+		<servlet-class>servlets.feed.ArticleDeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ArticleDeleteServlet</servlet-name>
+		<url-pattern>/Article/Delete</url-pattern>
+	</servlet-mapping>
 
 </web-app>

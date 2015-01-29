@@ -51,14 +51,22 @@
 </ul> --%>
 <c:forEach items="${requestScope.feed.getItems()}" var="item">
 <h2>
-	
-	<a href='${pageContext.request.contextPath}/Article/Read?articleId=${item.id}' class="btn btn-default" title="Mark as ${item.isRead ? 'Unread' : 'Read'}">
-		<span class="glyphicon ${item.isRead ? 'glyphicon-ok text-success' : 'glyphicon-certificate text-danger'}" aria-hidden="true"></span>
-		${item.isRead ? 'Read' : 'New'}
-	</a>
+	<span class="glyphicon ${item.isRead ? 'glyphicon-ok text-success' : 'glyphicon-certificate text-danger'}" aria-hidden="true"
+		title="${item.isRead ? 'Read' : 'New'}"></span>
 	<a href="${item.link}">${item.title}</a>
 </h2>
 <p>${item.description}</p>
 <input type="hidden" name="articleGuid" value="${item.guid}" />
 <p>${item.pubDate}</p>
+<p>
+	<a href='${pageContext.request.contextPath}/Article/Read?articleId=${item.id}' class="btn btn-default">
+		<span class="glyphicon ${!item.isRead ? 'glyphicon-ok text-success' : 'glyphicon-certificate text-danger'}" aria-hidden="true"></span>
+		Mark as ${item.isRead ? 'Unread' : 'Read'}
+	</a>
+	<a href='${pageContext.request.contextPath}/Article/Delete?articleId=${item.id}'
+		class="btn btn-default">
+		<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+		Delete Article
+	</a>
+</p>
 </c:forEach>

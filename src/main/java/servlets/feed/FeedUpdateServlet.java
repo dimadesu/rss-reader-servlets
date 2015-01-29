@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import servlets.db.DB;
+import servlets.helper.StringHelper;
 import servlets.xml.Collection;
 import servlets.xml.Item;
 import servlets.xml.RSSFeedParser;
@@ -47,10 +48,10 @@ public class FeedUpdateServlet extends HttpServlet {
 		RSSFeedParser parser = new RSSFeedParser(feedUrl);
 		Collection feed = parser.readFeed();
 		List<Item> articles = feed.getItems();
-		Boolean isGuidInDb = false;
 		int rowsInserted = 0;
 		int rowsUpdated = 0;
 		for(Item article : articles) {
+			Boolean isGuidInDb = false;
 			Integer articleId = null;
 			ResultSet rs2 = DB.select("select id from articles where guid = '" + article.getGuid() + "';");
 			try {
@@ -62,30 +63,28 @@ public class FeedUpdateServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			if (!isGuidInDb) {
-				// Replace single quotes with double single quotes. This syntax works for DB.
-				// Selects will work fine and return only one quote without any extra effort
 				rowsInserted += DB.update("INSERT INTO ARTICLES (ID, FEEDID, TITLE, GUID, LINK, DESCRIPTION, PUBDATE) VALUES " +
 						"(null, " +
 						feedId + ", '" +
-						article.getTitle().replaceAll("'", "''") + "', '" +
-						article.getGuid().replaceAll("'", "''") + "', '" +
-						article.getLink().replaceAll("'", "''") + "', '" +
-						article.getDescription().replaceAll("'", "''") + "', '" +
-						article.getPubDate().replaceAll("'", "''") + "');");
+						StringHelper.encode(article.getTitle()) + "', '" +
+						StringHelper.encode(article.getGuid()) + "', '" +
+						StringHelper.encode(article.getLink()) + "', '" +
+						StringHelper.encode(article.getDescription()) + "', '" +
+						StringHelper.encode(article.getPubDate()) + "');");
 			} else {
 				rowsUpdated += DB.update("UPDATE ARTICLES SET " +
 						"FEEDID =" + feedId +
-						", TITLE = '" + article.getTitle().replaceAll("'", "''") + "'" +
-						", LINK = '" + article.getLink().replaceAll("'", "''") + "'" +
-						", DESCRIPTION = '" + article.getDescription().replaceAll("'", "''") + "'" +
-						", PUBDATE = '" + article.getPubDate().replaceAll("'", "''") + "'" +
+						", TITLE = '" + StringHelper.encode(article.getTitle()) + "'" +
+						", LINK = '" + StringHelper.encode(article.getLink()) + "'" +
+						", DESCRIPTION = '" + StringHelper.encode(article.getDescription()) + "'" +
+						", PUBDATE = '" + StringHelper.encode(article.getPubDate()) + "'" +
 						" WHERE ID = " + articleId + ";");
 			}
-			if (rowsUpdated > 0 || rowsInserted > 0) {
-				request.setAttribute("returnType", "success");
-			} else {
-				request.setAttribute("returnType", "warning");
-			}
+		}
+		if (rowsUpdated > 0 || rowsInserted > 0) {
+			request.setAttribute("returnType", "success");
+		} else {
+			request.setAttribute("returnType", "warning");
 		}
 		request.setAttribute("rowsInserted", rowsInserted);
 		request.setAttribute("rowsUpdated", rowsUpdated);
