@@ -1,6 +1,7 @@
 package servlets.authentication;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -37,6 +38,12 @@ public class SessionCheckFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 	    HttpServletResponse res = (HttpServletResponse) response;  
 	    String uri = req.getRequestURI();
+	    
+	    HttpServletResponse resp = (HttpServletResponse) response;
+        resp.setHeader("Expires", "Tue, 03 Jul 2001 06:00:00 GMT");
+        resp.setHeader("Last-Modified", new Date().toString());
+        resp.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0");
+        resp.setHeader("Pragma", "no-cache");
 
 	    if (
     		(req.getSession().getAttribute("USERNAME") == null) &&
