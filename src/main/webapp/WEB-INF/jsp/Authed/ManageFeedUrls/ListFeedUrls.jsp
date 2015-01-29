@@ -25,6 +25,12 @@
 		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		View Articles
 	</a>
+	<a href='${pageContext.request.contextPath}/Feeds/DeleteOld?id=${item.id}'
+		class="btn btn-danger">
+		<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+		Delete Old Articles
+	</a>
+	|
 	<a href='${pageContext.request.contextPath}/ManageFeedUrls/AddFeedUrl?id=${item.id}'
 		class="btn btn-warning">
 		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

@@ -135,6 +135,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>FeedDeleteOldServlet</servlet-name>
+		<servlet-class>servlets.feed.FeedDeleteOldServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FeedDeleteOldServlet</servlet-name>
+		<url-pattern>/Feeds/DeleteOld</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>ArticleReadServlet</servlet-name>
 		<servlet-class>servlets.feed.ArticleReadServlet</servlet-class>
 	</servlet>
