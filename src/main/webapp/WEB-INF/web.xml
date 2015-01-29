@@ -133,5 +133,14 @@
 		<servlet-name>FeedUpdateServlet</servlet-name>
 		<url-pattern>/Feeds/Update</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ArticleReadServlet</servlet-name>
+		<servlet-class>servlets.feed.ArticleReadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ArticleReadServlet</servlet-name>
+		<url-pattern>/Article/Read</url-pattern>
+	</servlet-mapping>
 
 </web-app>

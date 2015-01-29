@@ -2,12 +2,14 @@ package servlets.xml;
 
 public class Item {
 
-	String title;
-	String guid;
-	String link;
-	String description;
-	String pubDate;
-	
+	private String title;
+	private String guid;
+	private String link;
+	private String description;
+	private String pubDate;
+	private Boolean isRead = false;
+	private Integer id;
+
 	public Item() {
 	}
 	
@@ -58,6 +60,22 @@ public class Item {
 
 	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;
+	}
+	
+	public Boolean getIsRead() {
+		return isRead;
+	}
+
+	public void setIsRead(Boolean isRead) {
+		this.isRead = isRead;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

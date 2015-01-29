@@ -42,19 +42,23 @@
 		</div>
 	</div>
 </form>
-<ul>
+<%-- <ul>
 	<li>title: ${requestScope.feed.title}</li>
 	<li>guid: ${requestScope.feed.guid}</li>
 	<li>link: ${requestScope.feed.link}</li>
 	<li>description: ${requestScope.feed.description}</li>
 	<li>pubDate: ${requestScope.feed.pubDate}</li>
-</ul>
+</ul> --%>
 <c:forEach items="${requestScope.feed.getItems()}" var="item">
-<ul>
-	<li>title: ${item.title}</li>
-	<li>guid: ${item.guid}</li>
-	<li>link: ${item.link}</li>
-	<li>description: ${item.description}</li>
-	<li>pubDate: ${item.pubDate}</li>
-</ul>
+<h2>
+	
+	<a href='${pageContext.request.contextPath}/Article/Read?articleId=${item.id}' class="btn btn-default" title="Mark as ${item.isRead ? 'Unread' : 'Read'}">
+		<span class="glyphicon ${item.isRead ? 'glyphicon-ok text-success' : 'glyphicon-certificate text-danger'}" aria-hidden="true"></span>
+		${item.isRead ? 'Read' : 'New'}
+	</a>
+	<a href="${item.link}">${item.title}</a>
+</h2>
+<p>${item.description}</p>
+<input type="hidden" name="articleGuid" value="${item.guid}" />
+<p>${item.pubDate}</p>
 </c:forEach>

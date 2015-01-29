@@ -34,6 +34,7 @@ public class FeedViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Integer userId = (Integer) request.getSession().getAttribute("USERID");
 		String feedId = (String) request.getParameter("id");
 		String defaultOrderBy = "articles.PUBDATE"; 
 		String orderBy = (String) request.getParameter("orderBy");
@@ -72,7 +73,14 @@ public class FeedViewServlet extends HttpServlet {
 		List<Item> newFeedItems = new ArrayList<Item> ();
 		try {
 			while(rs3.next()) {
+				Integer articleId = rs3.getInt(1);
 				Item item = new Item (rs3.getString(3), rs3.getString(4), rs3.getString(5), rs3.getString(6), rs3.getString(7));
+				item.setId(articleId);
+				ResultSet rs4 = DB.select("select isread from article_state where articleid = " + articleId + " and userid = " + userId + ";");
+				// If we have row for isread state use it. isRead if false by default in model
+				if(rs4.next()) {
+					item.setIsRead(rs4.getBoolean(1));
+				}
 				newFeedItems.add(item);
 			}
 		} catch (SQLException e) {
