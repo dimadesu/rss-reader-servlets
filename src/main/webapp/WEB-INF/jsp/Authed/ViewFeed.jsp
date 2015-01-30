@@ -70,3 +70,55 @@
 	</a>
 </p>
 </c:forEach>
+
+<div class="row">
+<div class="col-xs-1">
+<c:choose>
+	<c:when test="${requestScope.pageNumber != 1}">
+		<a class="btn btn-default"
+			href="${pageContext.request.contextPath}/Feeds/View?id=${requestScope.feedId}&pageNumber=${requestScope.pageNumber - 1}&pageSize=${requestScope.pageSize}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			Previous
+		</a>
+    </c:when>
+    <c:otherwise>
+		<span class="btn btn-default disabled">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			Previous
+		</span>
+	</c:otherwise>
+</c:choose>
+</div>
+<div class="col-xs-10 text-center">
+<c:forEach begin="1" end="${requestScope.numberOfPages}" var="i">
+    <c:choose>
+        <c:when test="${requestScope.pageNumber eq i}">
+            <span class="btn btn-default disabled">${i}</span>
+        </c:when>
+        <c:otherwise>
+            <a class="btn btn-default"
+				href="${pageContext.request.contextPath}/Feeds/View?id=${requestScope.feedId}&pageNumber=${i}&pageSize=${requestScope.pageSize}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}">
+				${i}
+			</a>
+        </c:otherwise>
+    </c:choose>
+</c:forEach>
+</div>
+<div class="col-xs-1 text-right">
+<c:choose>
+	<c:when test="${requestScope.pageNumber lt requestScope.numberOfPages}">
+		<a class="btn btn-default"
+			href="${pageContext.request.contextPath}/Feeds/View?id=${requestScope.feedId}&pageNumber=${requestScope.pageNumber + 1}&pageSize=${requestScope.pageSize}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}">
+			Next
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		</a>
+    </c:when>
+    <c:otherwise>
+		<span class="btn btn-default disabled">
+			Next
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		</span>
+	</c:otherwise>
+</c:choose>
+</div>
+</div>

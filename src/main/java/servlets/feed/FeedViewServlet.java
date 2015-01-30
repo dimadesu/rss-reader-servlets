@@ -36,25 +36,29 @@ public class FeedViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer userId = (Integer) request.getSession().getAttribute("USERID");
 		String feedId = (String) request.getParameter("id");
-		String defaultOrderBy = "articles.PUBDATE"; 
+		String defaultOrderBy = "PUBDATE"; 
 		String orderBy = (String) request.getParameter("orderBy");
 		String defaultOrderDirection = "DESC";
 		String orderDirection = (String) request.getParameter("orderDirection");
 		Integer defaultPageNumber = 1;
-		String query = "select articles.ID, articles.FEEDID, articles.TITLE, articles.GUID, articles.LINK, articles.DESCRIPTION, articles.PUBDATE from articles" +
+		String queryEnd = "";
+		String queryStart1 = "select articles.ID, articles.FEEDID, articles.TITLE, articles.GUID, " +
+				"articles.LINK, articles.DESCRIPTION, articles.PUBDATE";
+		String queryStart2 = "select count(*)";
+		String queryMiddle = " from articles" +
 			" JOIN FEEDUSER ON FEEDUSER.FEEDID = articles.feedid" +
 			" where FEEDUSER.userid = " + request.getSession().getAttribute("USERID");
 		if (feedId != "" && feedId != null) {
-			query += (" and feedid = " + feedId);
+			queryEnd += (" and feedid = " + feedId);
 		}
 		if(orderBy == null || !orderBy.matches("FEEDID|TITLE|GUID|LINK|DESCRIPTION|PUBDATE")){
 			orderBy = defaultOrderBy;
 		}
-		query += (" order by " + orderBy);
+		queryEnd += (" order by articles." + orderBy);
 		if(orderDirection == null || !orderDirection.matches("DESC|ASC")){
 			orderDirection = defaultOrderDirection;
 		}
-		query += (" " + orderDirection);
+		queryEnd += (" " + orderDirection);
 		Integer pageNumber;
 		try {
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
@@ -68,8 +72,8 @@ public class FeedViewServlet extends HttpServlet {
 		} catch (NumberFormatException e1) {
 			pageSize = defaultPageSize;
 		}
-		query += (" limit " + pageSize + " offset " + (pageNumber - 1) * pageSize);
-		ResultSet rs3 = DB.select(query + ";");
+		queryEnd += (" limit " + pageSize + " offset " + (pageNumber - 1) * pageSize);
+		ResultSet rs3 = DB.select(queryStart1 + queryMiddle + queryEnd + ";");
 		List<Item> newFeedItems = new ArrayList<Item> ();
 		try {
 			while(rs3.next()) {
@@ -90,11 +94,25 @@ public class FeedViewServlet extends HttpServlet {
 		feed.setItems(newFeedItems);
 		request.setAttribute("feed", feed);
 		
+		ResultSet rsCountAllItems = DB.select(queryStart2 + queryMiddle + ";");
+		Integer numberOfArticles = null;
+		Integer numberOfPages = null;
+		try {
+			if(rsCountAllItems.next()) {
+				numberOfArticles = rsCountAllItems.getInt(1);
+				numberOfPages = (int) Math.ceil(numberOfArticles * 1.0 / pageSize);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("feedId", feedId);
 		request.setAttribute("orderBy", orderBy);
 		request.setAttribute("orderDirection", orderDirection);
 		request.setAttribute("pageNumber", pageNumber);
 		request.setAttribute("pageSize", pageSize);
+        request.setAttribute("numberOfPages", numberOfPages);
 		
 		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ViewFeed.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
