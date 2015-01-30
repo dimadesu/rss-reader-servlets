@@ -69,15 +69,15 @@ public class FeedUpdateServlet extends HttpServlet {
 						StringHelper.encode(article.getTitle()) + "', '" +
 						StringHelper.encode(article.getGuid()) + "', '" +
 						StringHelper.encode(article.getLink()) + "', '" +
-						StringHelper.encode(article.getDescription()) + "', '" +
-						StringHelper.encode(article.getPubDate()) + "');");
+						StringHelper.encode(article.getDescription()) + "', " +
+						article.getPubDate() + ");");
 			} else {
 				rowsUpdated += DB.update("UPDATE ARTICLES SET " +
 						"FEEDID =" + feedId +
 						", TITLE = '" + StringHelper.encode(article.getTitle()) + "'" +
 						", LINK = '" + StringHelper.encode(article.getLink()) + "'" +
 						", DESCRIPTION = '" + StringHelper.encode(article.getDescription()) + "'" +
-						", PUBDATE = '" + StringHelper.encode(article.getPubDate()) + "'" +
+						", PUBDATE = " + article.getPubDate() + 
 						" WHERE ID = " + articleId + ";");
 			}
 		}

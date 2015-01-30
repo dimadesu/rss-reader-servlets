@@ -53,12 +53,4 @@ public class Collection {
 		return pubDate;
 	}
 
-	@Override
-	public String toString() {
-		return "<h2>" + title + "</h2>" +
-				"<p>" + description + "</p>" +
-				"<p>" + pubDate + "</p>" +
-				"<p><a href='" + link + "'>" + link + "</a></p>";
-	}
-
 }

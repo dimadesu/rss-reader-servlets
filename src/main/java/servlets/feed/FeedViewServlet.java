@@ -78,7 +78,7 @@ public class FeedViewServlet extends HttpServlet {
 		try {
 			while(rs3.next()) {
 				Integer articleId = rs3.getInt(1);
-				Item item = new Item (rs3.getString(3), rs3.getString(4), rs3.getString(5), rs3.getString(6), rs3.getString(7));
+				Item item = new Item (rs3.getString(3), rs3.getString(4), rs3.getString(5), rs3.getString(6), rs3.getLong(7));
 				item.setId(articleId);
 				ResultSet rs4 = DB.select("select isread from article_state where articleid = " + articleId + " and userid = " + userId + ";");
 				// If we have row for isread state use it. isRead if false by default in model

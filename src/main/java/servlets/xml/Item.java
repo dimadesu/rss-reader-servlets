@@ -1,12 +1,18 @@
 package servlets.xml;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Item {
 
 	private String title;
 	private String guid;
 	private String link;
 	private String description;
-	private String pubDate;
+	private Long pubDate;
 	private Boolean isRead = false;
 	private Integer id;
 
@@ -14,7 +20,7 @@ public class Item {
 	}
 	
 	public Item(String title, String guid, String link,
-			String description, String pubDate) {
+			String description, Long pubDate) {
 		this.title = title;
 		this.guid = guid;
 		this.link = link;
@@ -54,12 +60,12 @@ public class Item {
 		this.description = description;
 	}
 
-	public String getPubDate() {
+	public Long getPubDate() {
 		return pubDate;
 	}
 
 	public void setPubDate(String pubDate) {
-		this.pubDate = pubDate;
+		this.pubDate = parseDate(pubDate);
 	}
 	
 	public Boolean getIsRead() {
@@ -77,13 +83,16 @@ public class Item {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	@Override
-	public String toString() {
-		return "<h2>" + title + "</h2>" +
-				"<p>" + description + "</p>" +
-				"<p>" + pubDate + "</p>" +
-				"<p><a href='" + link + "'>" + link + "</a></p>";
+	
+	public Long parseDate (String pubDate) {
+		DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
+		Date date = null;
+		try {
+			date = formatter.parse(pubDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date.getTime();
 	}
 
 }
