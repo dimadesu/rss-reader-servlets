@@ -57,7 +57,7 @@
 </h2>
 <p>${item.description}</p>
 <input type="hidden" name="articleGuid" value="${item.guid}" />
-<p>${item.pubDate}</p>
+<p>${item.getPubDateFormatted()}</p>
 <p>
 	<a href='${pageContext.request.contextPath}/Article/Read?articleId=${item.id}' class="btn btn-default">
 		<span class="glyphicon ${!item.isRead ? 'glyphicon-ok text-success' : 'glyphicon-certificate text-danger'}" aria-hidden="true"></span>

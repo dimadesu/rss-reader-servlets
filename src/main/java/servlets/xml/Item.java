@@ -64,6 +64,10 @@ public class Item {
 		return pubDate;
 	}
 
+	public String getPubDateFormatted() {
+		return new Date(pubDate).toString();
+	}
+
 	public void setPubDate(String pubDate) {
 		this.pubDate = parseDate(pubDate);
 	}
