@@ -37,6 +37,17 @@
 			</div>
 		</div>
 		<div class="col-md-2">
+			<label>Date range</label>
+			<div class="input-daterange input-group" id="datepicker">
+			    <input type="text" class="input-sm form-control" id="start" />
+			    <input type="hidden" name="dateStart" id="start-hidden" />
+			    <span class="input-group-addon">to</span>
+			    <input type="text" class="input-sm form-control" id="end" />
+			    <input type="hidden" name="dateEnd" id="end-hidden" />
+			</div>
+			<input type="hidden" id="datepicker-hidden" name="" />
+		</div>
+		<div class="col-md-2">
 			<label>&nbsp;</label>
 			<input class="btn btn-primary form-control" type="submit" value="Submit" />
 		</div>

@@ -12,6 +12,7 @@
 <link rel="icon" href="${pageContext.request.contextPath}/assets/favicon.ico">
 <!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath}/assets/styles/bootstrap.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/assets/styles/datepicker3.css" rel="stylesheet" />
 <title>RSS Reader</title>
 </head>
 <body>
@@ -23,6 +24,8 @@
 <jsp:include page="/WEB-INF/jsp/Common/Footer.jsp" />
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/libs/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/libs/bootstrap-datepicker.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/datefilter.js"></script>
 </body>
 </html>
