@@ -2,16 +2,10 @@
 <h1>Feed</h1>
 <form action="" method="get">
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<div class="form-group">
-				<label for="pageNumber">Page number</label>
-				<input class="form-control" type="text" id="pageNumber" name="pageNumber" value="${requestScope.pageNumber}" />
-			</div>
-		</div>
-		<div class="col-md-2">
-			<div class="form-group">
-				<label for="pageSize">Items per page</label>
-				<input class="form-control" type="text" id="pageSize" name="pageSize" value="${requestScope.pageSize}" />
+				<label for="searchTerm">Search term</label>
+				<input class="form-control" type="text" id="searchTerm" name="searchTerm" value="${requestScope.searchTerm}" />
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -36,7 +30,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<label>Date range</label>
 			<div class="input-daterange input-group" id="datepicker">
 			    <input type="text" class="input-sm form-control" id="date-start" />
@@ -87,7 +81,7 @@
 <c:choose>
 	<c:when test="${requestScope.pageNumber != 1}">
 		<a class="btn btn-default"
-			href="${pageContext.request.contextPath}/Feeds/View?id=${requestScope.feedId}&pageNumber=${requestScope.pageNumber - 1}&pageSize=${requestScope.pageSize}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}">
+			href="${pageContext.request.contextPath}/Feeds/View?searchTerm=${requestScope.searchTerm}&id=${requestScope.feedId}&pageNumber=${requestScope.pageNumber - 1}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}&dateStart=${requestScope.dateStart}&dateEnd=${requestScope.dateEnd}">
 			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 			Previous
 		</a>
@@ -108,7 +102,7 @@
         </c:when>
         <c:otherwise>
             <a class="btn btn-default"
-				href="${pageContext.request.contextPath}/Feeds/View?id=${requestScope.feedId}&pageNumber=${i}&pageSize=${requestScope.pageSize}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}">
+				href="${pageContext.request.contextPath}/Feeds/View?searchTerm=${requestScope.searchTerm}&id=${requestScope.feedId}&pageNumber=${i}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}&dateStart=${requestScope.dateStart}&dateEnd=${requestScope.dateEnd}">
 				${i}
 			</a>
         </c:otherwise>
@@ -119,7 +113,7 @@
 <c:choose>
 	<c:when test="${requestScope.pageNumber lt requestScope.numberOfPages}">
 		<a class="btn btn-default"
-			href="${pageContext.request.contextPath}/Feeds/View?id=${requestScope.feedId}&pageNumber=${requestScope.pageNumber + 1}&pageSize=${requestScope.pageSize}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}">
+			href="${pageContext.request.contextPath}/Feeds/View?searchTerm=${requestScope.searchTerm}&id=${requestScope.feedId}&pageNumber=${requestScope.pageNumber + 1}&orderBy=${requestScope.orderBy}&orderDirection=${requestScope.orderDirection}&dateStart=${requestScope.dateStart}&dateEnd=${requestScope.dateEnd}">
 			Next
 			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 		</a>

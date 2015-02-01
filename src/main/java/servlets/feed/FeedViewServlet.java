@@ -27,15 +27,6 @@ public class FeedViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Integer userId = (Integer) request.getSession().getAttribute("USERID");
-		String feedId = (String) request.getParameter("id");
-		
-		String defaultOrderBy = "PUBDATE"; 
-		String orderBy = (String) request.getParameter("orderBy");
-		
-		String defaultOrderDirection = "DESC";
-		String orderDirection = (String) request.getParameter("orderDirection");
-		
-		String queryEnd = "";
 		
 		String queryStart1 = "select articles.ID, articles.FEEDID, articles.TITLE, articles.GUID, " +
 				"articles.LINK, articles.DESCRIPTION, articles.PUBDATE";
@@ -44,7 +35,14 @@ public class FeedViewServlet extends HttpServlet {
 		
 		String queryMiddle = " from articles" +
 			" JOIN FEEDUSER ON FEEDUSER.FEEDID = articles.feedid" +
-			" where FEEDUSER.userid = " + request.getSession().getAttribute("USERID");
+			" where FEEDUSER.userid = " + userId;
+		
+		String queryEnd = "";
+		
+		String feedId = (String) request.getParameter("id");
+		if (feedId != "" && feedId != null) {
+			queryMiddle += new String (" and FEEDUSER.feedid = " + feedId);
+		}
 		
 		Long dateStart = null;
 		if(request.getParameter("dateStart") != null) {
@@ -72,16 +70,21 @@ public class FeedViewServlet extends HttpServlet {
 			queryMiddle += new String (" and articles.pubdate <= " + dateEnd);
 		}
 		
-		if (feedId != "" && feedId != null) {
-			queryMiddle += new String (" and FEEDUSER.feedid = " + feedId);
+		String searchTerm = (String) request.getParameter("searchTerm");
+		if (searchTerm != "" && searchTerm != null) {
+			queryMiddle += new String (" and LCASE (articles.title) like '%" + searchTerm.toLowerCase() + "%'");
 		}
-		
+
+		String defaultOrderBy = "PUBDATE"; 
+		String orderBy = (String) request.getParameter("orderBy");
 		if(orderBy == null || !orderBy.matches("FEEDID|TITLE|GUID|LINK|DESCRIPTION|PUBDATE")){
 			orderBy = defaultOrderBy;
 		}
 		
 		queryEnd += new String (" order by articles." + orderBy);
 		
+		String defaultOrderDirection = "DESC";
+		String orderDirection = (String) request.getParameter("orderDirection");
 		if(orderDirection == null || !orderDirection.matches("DESC|ASC")){
 			orderDirection = defaultOrderDirection;
 		}
@@ -135,7 +138,6 @@ public class FeedViewServlet extends HttpServlet {
 				numberOfPages = (int) Math.ceil(numberOfArticles * 1.0 / pageSize);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -147,6 +149,7 @@ public class FeedViewServlet extends HttpServlet {
         request.setAttribute("numberOfPages", numberOfPages);
         request.setAttribute("dateStart", dateStart);
         request.setAttribute("dateEnd", dateEnd);
+        request.setAttribute("searchTerm", searchTerm);
 		
 		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ViewFeed.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
