@@ -20,7 +20,7 @@ public class ArticleDeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String articleId = (String) request.getParameter("articleId");
-		Integer userId = (Integer) request.getSession().getAttribute("USERID");
+		Integer userId = Integer.parseInt(request.getSession().getAttribute("USERID").toString());
 		Integer rowsUpdated = 0;
 		
 		if (articleId != null) {

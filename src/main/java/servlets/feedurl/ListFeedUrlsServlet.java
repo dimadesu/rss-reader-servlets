@@ -24,7 +24,7 @@ public class ListFeedUrlsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: get user id in request
-		Integer userid = (Integer) request.getSession().getAttribute("USERID");
+		Integer userid = Integer.parseInt(request.getSession().getAttribute("USERID").toString());
 		// Returns: id, url
 		String query = "SELECT FEEDS.*  " +
 			"FROM FEEDUSER JOIN FEEDS ON FEEDUSER.FEEDID = FEEDS.ID " +
@@ -43,6 +43,7 @@ public class ListFeedUrlsServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("feedUrlsList", list);
+		request.setAttribute("feedUrlsListSize", list.size());
 		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ManageFeedUrls/ListFeedUrls.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
 		rd.forward(request, response);

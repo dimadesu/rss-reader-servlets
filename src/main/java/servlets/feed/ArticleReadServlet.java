@@ -22,7 +22,7 @@ public class ArticleReadServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String articleId = (String) request.getParameter("articleId");
-		Integer userId = (Integer) request.getSession().getAttribute("USERID");
+		Integer userId = Integer.parseInt(request.getSession().getAttribute("USERID").toString());
 		Boolean isRead = null;
 		Integer feedId = null;
 		Integer articleStateId = null;

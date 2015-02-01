@@ -26,7 +26,7 @@ public class FeedViewServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Integer userId = (Integer) request.getSession().getAttribute("USERID");
+		Integer userId = Integer.parseInt(request.getSession().getAttribute("USERID").toString());
 		
 		String queryStart1 = "select articles.ID, articles.FEEDID, articles.TITLE, articles.GUID, " +
 				"articles.LINK, articles.DESCRIPTION, articles.PUBDATE";

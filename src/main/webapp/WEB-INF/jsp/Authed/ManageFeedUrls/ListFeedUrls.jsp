@@ -6,11 +6,13 @@
 		<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 		New Url
 	</a>
+	<% if((int) request.getAttribute("feedUrlsListSize") > 1) { %>
 	<a href='${pageContext.request.contextPath}/Feeds/View'
 		class="btn btn-primary">
 		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		View All Articles
 	</a>
+	<% } %>
 </p>
 <c:forEach items="${requestScope.feedUrlsList}" var="item">
 <h2>${item.url}</h2>  

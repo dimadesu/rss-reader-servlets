@@ -47,13 +47,6 @@
 		</div>
 	</div>
 </form>
-<%-- <ul>
-	<li>title: ${requestScope.feed.title}</li>
-	<li>guid: ${requestScope.feed.guid}</li>
-	<li>link: ${requestScope.feed.link}</li>
-	<li>description: ${requestScope.feed.description}</li>
-	<li>pubDate: ${requestScope.feed.pubDate}</li>
-</ul> --%>
 <c:forEach items="${requestScope.feed.getItems()}" var="item">
 <h2>
 	<span class="glyphicon ${item.isRead ? 'glyphicon-ok text-success' : 'glyphicon-certificate text-danger'}" aria-hidden="true"

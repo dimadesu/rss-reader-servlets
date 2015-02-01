@@ -27,7 +27,7 @@ public class FeedDeleteOldServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String feedUrl = null;
 		String feedId = (String) request.getParameter("id");
-		Integer userId = (Integer) request.getSession().getAttribute("USERID");
+		Integer userId = Integer.parseInt(request.getSession().getAttribute("USERID").toString());
 		
 		// Returns: url
 		String query = "SELECT FEEDS.URL " +
