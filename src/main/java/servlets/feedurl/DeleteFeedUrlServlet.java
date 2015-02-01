@@ -18,7 +18,7 @@ public class DeleteFeedUrlServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = (String) request.getParameter("id");;
+		String id = (String) request.getParameter("id");
 		if(id != "null") {
 			Integer rowsDeleted = DB.update("delete from feeduser where feedid =" + id + " and userid = " + request.getSession().getAttribute("USERID") + ";" +
 				"delete from feeds where id =" + id + ";");

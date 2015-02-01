@@ -16,18 +16,6 @@
 		<session-timeout>10</session-timeout>
 	</session-config>
 
-	<!-- <env-entry>
-		<description>admin email</description>
-		<env-entry-name>adminEmail</env-entry-name>
-		<env-entry-value>dantonov@dataart.com</env-entry-value>
-	</env-entry>
-
-	<resource-ref>
-		<res-ref-name>HRDS</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<mapped-name>jdbc/__default</mapped-name>
-	</resource-ref> -->
-
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
@@ -104,6 +92,15 @@
 	<servlet-mapping>
 		<servlet-name>AddFeedUrlServlet</servlet-name>
 		<url-pattern>/ManageFeedUrls/AddFeedUrl</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DownloadFeedUrlsServlet</servlet-name>
+		<servlet-class>servlets.feedurl.DownloadFeedUrlsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DownloadFeedUrlsServlet</servlet-name>
+		<url-pattern>/ManageFeedUrls/DownloadFeedUrls</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

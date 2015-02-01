@@ -44,7 +44,6 @@ public class FeedUpdateServlet extends HttpServlet {
 		// Parser needs userid, feedid to locate feed url
 		// it will request url parse to collection, then iterate collection and fill in DB for articles
 		// when it iterates it should check if item id is already in DB for each item before inserting
-		// TODO: Maybe parse date to timestamp and keep it in DB as timestamp
 		RSSFeedParser parser = new RSSFeedParser(feedUrl);
 		Collection feed = parser.readFeed();
 		List<Item> articles = feed.getItems();

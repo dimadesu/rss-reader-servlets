@@ -23,7 +23,6 @@ public class ListFeedUrlsServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: get user id in request
 		Integer userid = Integer.parseInt(request.getSession().getAttribute("USERID").toString());
 		// Returns: id, url
 		String query = "SELECT FEEDS.*  " +

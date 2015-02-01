@@ -13,6 +13,13 @@
 		View All Articles
 	</a>
 	<% } %>
+	<% if((int) request.getAttribute("feedUrlsListSize") > 1) { %>
+	<a href='${pageContext.request.contextPath}/ManageFeedUrls/DownloadFeedUrls'
+		class="btn btn-default">
+		<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+		Download Urls as .txt
+	</a>
+	<% } %>
 </p>
 <c:forEach items="${requestScope.feedUrlsList}" var="item">
 <h2>${item.url}</h2>  
