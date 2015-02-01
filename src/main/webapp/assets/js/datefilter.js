@@ -1,6 +1,16 @@
 $(function(){
-	$('#datepicker').datepicker().on("changeDate", function(event) {
-		var hiddenInputSelector = "#" + $(event.target).attr("id") + "-hidden";
-		$(hiddenInputSelector).val(event.date.valueOf());
-	});
+	function createDP (selector) {
+		var $input = $(selector),
+			$hidden = $(selector + "-hidden");
+		$input.datepicker()
+			.on("changeDate", function(event) {
+				$hidden.val(event.date.valueOf());
+			});
+		var date = new Date(parseInt($hidden.val(), 10));
+		if (!isNaN(date)) {
+			$input.datepicker("update", date);
+		}
+	}
+	createDP("#date-start");
+	createDP("#date-end");
 });

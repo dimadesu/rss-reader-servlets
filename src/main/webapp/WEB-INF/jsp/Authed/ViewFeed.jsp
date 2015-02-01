@@ -39,11 +39,11 @@
 		<div class="col-md-2">
 			<label>Date range</label>
 			<div class="input-daterange input-group" id="datepicker">
-			    <input type="text" class="input-sm form-control" id="start" />
-			    <input type="hidden" name="dateStart" id="start-hidden" />
+			    <input type="text" class="input-sm form-control" id="date-start" />
+			    <input type="hidden" name="dateStart" id="date-start-hidden" value="${requestScope.dateStart}" />
 			    <span class="input-group-addon">to</span>
-			    <input type="text" class="input-sm form-control" id="end" />
-			    <input type="hidden" name="dateEnd" id="end-hidden" />
+			    <input type="text" class="input-sm form-control" id="date-end" />
+			    <input type="hidden" name="dateEnd" id="date-end-hidden" value="${requestScope.dateEnd}" />
 			</div>
 			<input type="hidden" id="datepicker-hidden" name="" />
 		</div>

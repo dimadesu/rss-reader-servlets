@@ -17,54 +17,85 @@ import servlets.db.DB;
 import servlets.xml.Collection;
 import servlets.xml.Item;
 
-/**
- * Servlet implementation class Home
- */
 public class FeedViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FeedViewServlet() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Integer userId = (Integer) request.getSession().getAttribute("USERID");
 		String feedId = (String) request.getParameter("id");
+		
 		String defaultOrderBy = "PUBDATE"; 
 		String orderBy = (String) request.getParameter("orderBy");
+		
 		String defaultOrderDirection = "DESC";
 		String orderDirection = (String) request.getParameter("orderDirection");
-		Integer defaultPageNumber = 1;
+		
 		String queryEnd = "";
+		
 		String queryStart1 = "select articles.ID, articles.FEEDID, articles.TITLE, articles.GUID, " +
 				"articles.LINK, articles.DESCRIPTION, articles.PUBDATE";
+		
 		String queryStart2 = "select count(*)";
+		
 		String queryMiddle = " from articles" +
 			" JOIN FEEDUSER ON FEEDUSER.FEEDID = articles.feedid" +
 			" where FEEDUSER.userid = " + request.getSession().getAttribute("USERID");
+		
+		Long dateStart = null;
+		if(request.getParameter("dateStart") != null) {
+			try {
+				dateStart = Long.parseLong(request.getParameter("dateStart"));
+			} catch (NumberFormatException e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		Long dateEnd = null;
+		if(request.getParameter("dateEnd") != null){
+			try {
+				dateEnd = Long.parseLong(request.getParameter("dateEnd"));
+			} catch (NumberFormatException e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		if (dateStart != null && dateEnd != null) {
+			queryMiddle += new String (" and articles.pubdate BETWEEN " + dateStart + " AND " + dateEnd);
+		} else if (dateStart != null) {
+			queryMiddle += new String (" and articles.pubdate >= " + dateStart);
+		} else if (dateEnd != null) {
+			queryMiddle += new String (" and articles.pubdate <= " + dateEnd);
+		}
+		
 		if (feedId != "" && feedId != null) {
 			queryMiddle += new String (" and FEEDUSER.feedid = " + feedId);
 		}
+		
 		if(orderBy == null || !orderBy.matches("FEEDID|TITLE|GUID|LINK|DESCRIPTION|PUBDATE")){
 			orderBy = defaultOrderBy;
 		}
+		
 		queryEnd += new String (" order by articles." + orderBy);
+		
 		if(orderDirection == null || !orderDirection.matches("DESC|ASC")){
 			orderDirection = defaultOrderDirection;
 		}
+		
 		queryEnd += new String (" " + orderDirection);
+		
+		Integer defaultPageNumber = 1;
 		Integer pageNumber;
 		try {
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		} catch (NumberFormatException e1) {
 			pageNumber = defaultPageNumber;
 		}
+		
 		Integer defaultPageSize = 10;
 		Integer pageSize;
 		try {
@@ -73,6 +104,7 @@ public class FeedViewServlet extends HttpServlet {
 			pageSize = defaultPageSize;
 		}
 		queryEnd += new String (" limit " + pageSize + " offset " + (pageNumber - 1) * pageSize);
+		
 		ResultSet rs3 = DB.select(queryStart1 + queryMiddle + queryEnd + ";");
 		List<Item> newFeedItems = new ArrayList<Item> ();
 		try {
@@ -113,6 +145,8 @@ public class FeedViewServlet extends HttpServlet {
 		request.setAttribute("pageNumber", pageNumber);
 		request.setAttribute("pageSize", pageSize);
         request.setAttribute("numberOfPages", numberOfPages);
+        request.setAttribute("dateStart", dateStart);
+        request.setAttribute("dateEnd", dateEnd);
 		
 		request.setAttribute("viewId", "/WEB-INF/jsp/Authed/ViewFeed.jsp");
 		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/Common/Index.jsp");
